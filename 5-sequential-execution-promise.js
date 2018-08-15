@@ -1,34 +1,39 @@
 var fs = require('fs');
-var {promisify} = require('util');
+var { promisify } = require('util');
 var writeFile = promisify(fs.writeFile);
 var unlink = promisify(fs.unlink);
 var beep = () => process.stdout.write('\x07');
 
 var delay = (seconds) => new Promise((resolve) => {
-  setTimeout(resolve, seconds*1000);
+  setTimeout(resolve, seconds * 1000);
 })
 
 const doStuffSequentially = () => Promise.resolve()
-  .then(() => console.log('starting') )
-  .then(() => delay(2) )
-  .then(() => 'waiting' )
+  .then(() => console.log('starting'))
+  .then(() => delay(2))
+  .then(() => 'waiting')
   .then(console.log)
-  .then(() => delay(2) )
-  .then(() => 'some more waiting' )
+  .then(() => delay(2))
+  .then(() => 'some more waiting')
   .then(console.log)
-  .then(() => writeFile('file.txt', 'This is a sample file') )
+  .then(() => writeFile('file.txt', 'This is a sample file'))
   .then(beep)
-  .then(() => 'File created' )
+  .then(() => 'File created')
   .then(console.log)
-  .then(() => delay(2) )
+  .then(() => delay(2))
   .then(() => unlink('file.txt'))
   .then(beep)
-  .then(() => 'File removed' )
+  .then(() => 'File removed')
   .then(console.log)
-  .catch((error) => {console.error(error)});
+  .catch((error) => { console.error(error) });
 
-  doStuffSequentially();
-
+doStuffSequentially();
+/*  
+doStuffSequentially()
+  .then(() => console.log('again again !!'))
+  .then(() => doStuffSequentially())
+  .then(() => console.log('Enough Already'));
+*/
 
 
 
