@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jitu-sehrawat/Advanced-Nodejs/issues"
   },
-  "homepage": "https://github.com/jitu-sehrawat/Advanced-Nodejs#readme"
+  "homepage": "https://github.com/jitu-sehrawat/Advanced-Nodejs#readme",
+  "dependencies": {
+    "multiparty": "4.2.1"
+  }
 }
